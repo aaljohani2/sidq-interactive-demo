@@ -3,104 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07121f" />
-  <meta name="description" content="صِدق / MIDA — محاكاة تفاعلية توضيحية لمنظومة التحقق الفيزيائي المستقل من صحة بيانات الأنظمة." />
-  <title>صِدق | SIDQ — عرض تفاعلي لمنظومة التحقق الفيزيائي</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#07131d" />
+  <meta name="description" content="صِدق SIDQ / MIDA — استكشف منصة التحقق الفيزيائي المستقل في تجربة تشغيل تفاعلية ثلاثية الأبعاد." />
+  <title>صِدق | SIDQ / MIDA — النموذج الأولي التفاعلي</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./prototype.css" />
   <script type="importmap">
-  {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}
   </script>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./prototype.js"></script>
 </head>
 <body>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
-  <header class="site-header shell">
-    <a class="brand" href="#top" aria-label="صِدق، البداية">
-      <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
-      <span class="brand-words"><strong>صِدق <b>SIDQ</b></strong><small>Cyber-Physical Verification</small></span>
+  <header class="topbar shell">
+    <a class="brand" href="#home" aria-label="صِدق - الرئيسية">
+      <span class="brand-icon" aria-hidden="true"></span>
+      <span class="brand-text"><strong>صِدق <span>SIDQ</span></strong><small>CYBER-PHYSICAL VERIFICATION</small></span>
     </a>
-    <nav class="top-nav" aria-label="التنقل">
-      <a href="#demo">المحاكاة</a>
-      <a href="#evidence">قراءات النظام</a>
-      <a href="#architecture">المنظومة</a>
+    <nav class="top-links" aria-label="أقسام العرض">
+      <a href="#prototype">المجسم التفاعلي</a>
+      <a href="#readings">قراءات التشغيل</a>
+      <a href="#hardware">المكونات والتوصيلات</a>
+      <a href="#operation">طريقة التشغيل</a>
     </nav>
-    <span class="edition"><span class="live-dot"></span> نموذج توضيحي · V0.1</span>
+    <span class="header-version">MIDA · PROTOTYPE V1</span>
   </header>
-  <main id="top" class="shell">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-line"></span> SIDQ / MIDA · INTERACTIVE CONCEPT DEMO</div>
-        <h1 id="hero-title">عندما تتغير البيانات، <span>تبقى الفيزياء شاهدًا.</span></h1>
-        <p>استكشف كيف يمكن لقناة قياس مستقلة أن تكشف التعارض بين البيانات المبلّغ عنها والسلوك الفيزيائي الفعلي، وتساعد في التمييز مبدئيًا بين العطل والتلاعب.</p>
-        <div class="hero-actions"><a class="action-link" href="#demo">ابدأ المحاكاة <span aria-hidden="true">←</span></a><span class="hero-note">أربعة سيناريوهات · عرض ثلاثي الأبعاد</span></div>
+  <main id="home" class="shell">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <span class="overline">SIDQ / MIDA · INTERACTIVE HARDWARE EXPERIENCE</span>
+        <h1 id="heroTitle">صِدق. <em>شاهد فيزيائي مستقل</em> يجعل البيانات قابلة للتحقق.</h1>
+        <p>منصة تجمع بين قراءة الجهاز التشغيلية وشواهد فيزيائية مستقلة للسرعة والطاقة والاهتزاز؛ لتوضيح العلاقة بين سلوك المعدّة وصحة البيانات المبلّغ عنها، مع سيناريوهات تفاعلية تشرح اكتشاف التعارض.</p>
+        <div class="hero-facts">
+          <div class="fact"><strong>60 × 40 <small>cm</small></strong><small>قاعدة الأكريلك</small></div>
+          <div class="fact"><strong>2 × ESP32-S3</strong><small>قناتا قياس مستقلتان</small></div>
+          <div class="fact"><strong>4 SCENARIOS</strong><small>أوضاع اختبار قابلة للتبديل</small></div>
+          <div class="fact"><strong>12V / DC</strong><small>منصة محرك اختبار</small></div>
+        </div>
       </div>
-      <div class="hero-signature" aria-hidden="true"><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span><div class="hero-core">S<span>/</span>W</div><small>TELEMETRY &nbsp; / &nbsp; WITNESS</small></div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="hero-ring"></span><span class="hero-ring"></span>
+        <div class="hero-emblem"><strong>S/W</strong><small>SIDQ · MIDA</small></div>
+      </div>
     </section>
-    <div class="notice" role="note"><span class="notice-symbol">i</span><p><strong>تنويه علمي:</strong> هذا عرض مفاهيمي بمحاكاة وبيانات اصطناعية، لا يتصل بجهاز فعلي ولا يمثل نتائج تجارب أو دقة كشف مُثبتة. أشكال المكوّنات ثلاثية الأبعاد تقريبية وغير صالحة كمخططات تصنيع.</p></div>
-    <section id="demo" class="demo-grid" aria-label="تجربة محاكاة صِدق">
-      <div class="visual-card panel">
-        <div class="section-head stage-head">
-          <div><span class="kicker">01 / DIGITAL TEST BENCH</span><h2>منصة الاختبار الافتراضية</h2></div>
-          <span class="model-badge"><i></i> 3D INTERACTIVE</span>
+
+    <section class="main-grid" id="prototype" aria-label="المجسم ولوحة التحكم">
+      <div class="viewer-panel panel">
+        <div class="section-head">
+          <div><span class="section-tag">01 / ACRYLIC BENCH</span><h2>النموذج الأولي ثلاثي الأبعاد</h2></div>
+          <span class="micro-pill">60×40 CM · INTERACTIVE 3D</span>
         </div>
-        <div class="stage" id="scene-wrap">
-          <canvas id="scene" aria-label="تصور ثلاثي الأبعاد قابل للتدوير لمنصة محرك ووحدتي قياس مستقلتين"></canvas>
-          <div class="stage-fallback" id="scene-fallback" role="img" aria-label="مخطط مبسط لمنصة الاختبار" hidden>
-            <div class="fallback-system"><div>ESP32-A<small>Telemetry</small></div><div class="fallback-motor">MOTOR <small>12V</small></div><div>ESP32-B<small>Witness</small></div></div>
-            <p>العرض الثلاثي الأبعاد غير متاح في هذا المتصفح. بقية المحاكاة تظل قابلة للاستخدام.</p>
+        <div class="view-toolbar">
+          <div class="view-group" role="group" aria-label="زاوية المجسم">
+            <button type="button" class="toolbar-btn active" data-view="isometric">منظور كامل</button>
+            <button type="button" class="toolbar-btn" data-view="top">منظر علوي</button>
+            <button type="button" class="toolbar-btn" data-view="front">منظر أمامي</button>
+            <button type="button" class="toolbar-btn" data-view="side">منظر جانبي</button>
+            <button type="button" class="toolbar-btn" data-view="exploded">تفكيك الأجزاء</button>
           </div>
-          <span class="stage-corner stage-corner-tl"></span><span class="stage-corner stage-corner-tr"></span><span class="stage-corner stage-corner-bl"></span><span class="stage-corner stage-corner-br"></span>
-          <div class="stage-hud stage-hud-top"><span>SIMULATION ENVIRONMENT</span><span id="stage-clock">T+00:00</span></div>
-          <div class="stage-hud stage-hud-bottom"><span><span class="signal-dot signal-a"></span> بيانات مُبلّغ عنها</span><span><span class="signal-dot signal-b"></span> شاهد مستقل</span></div>
-          <div class="stage-help">اسحب لتدوير النموذج · استخدم عجلة الفأرة للتقريب</div>
-          <div class="component-overlay"><span>المكوّن المحدد</span><strong id="component-title">المحرك / الأصل الفيزيائي</strong><p id="component-description">محرك 12V مع مشفّر دوران. يمثل المعدّة التي نرصد سلوكها في المحاكاة.</p></div>
         </div>
-        <div class="component-shortcuts" aria-label="استعراض مكونات النموذج">
-          <button class="chip selected" type="button" data-component="motor">المحرك</button>
-          <button class="chip" type="button" data-component="nodeA">ESP32-A</button>
-          <button class="chip" type="button" data-component="nodeB">ESP32-B</button>
-          <button class="chip" type="button" data-component="sensors">الشواهد الفيزيائية</button>
+        <div id="viewer" class="viewer">
+          <canvas id="sceneCanvas" aria-label="نموذج ثلاثي الأبعاد تفاعلي لمنصة أكريلك تحتوي على محرك ووحدات ESP32 وحساسات وأسلاك وأزرار"></canvas>
+          <div id="viewerFallback" class="viewer-fallback" hidden>
+            <div class="schematic" aria-hidden="true"><span>ESP32-A</span><span>12V MOTOR</span><span>ESP32-B</span></div>
+            <p>يمكنك تجربة جميع عناصر التحكم والقراءات من اللوحة الجانبية.</p>
+          </div>
+          <div class="viewer-hud top"><span>SIDQ / PROTOTYPE BENCH</span><span id="clock">T+00:00</span></div>
+          <span id="viewerHint" class="viewer-hint">اسحب لتدوير المجسم · استخدم العجلة للتقريب · اضغط على أي قطعة</span>
+          <div class="viewer-model-title">
+            <small>الجزء المحدد</small>
+            <strong id="viewTitle">محرك FIT0186 مع المشفّر</strong>
+            <p id="viewDesc">محرك 12V مع قرص القياس المستقل.</p>
+          </div>
+          <div class="viewer-hud bottom">
+            <div class="viewer-indicator"><span><i class="indicator-dot teal"></i>Telemetry</span><span><i class="indicator-dot"></i>Trusted Witness</span><span><i class="indicator-dot purple"></i>Hall Encoder</span></div>
+            <strong>ACRYLIC · MOUNTED HARDWARE</strong>
+          </div>
+        </div>
+        <div class="part-strip" role="group" aria-label="اختيار جزء في المجسم">
+          <button type="button" class="part-chip selected" data-part="motor">المحرك</button>
+          <button type="button" class="part-chip" data-part="disc">القرص</button>
+          <button type="button" class="part-chip" data-part="espA">ESP32-A</button>
+          <button type="button" class="part-chip" data-part="espB">ESP32-B</button>
+          <button type="button" class="part-chip" data-part="driver">Motor Driver</button>
+          <button type="button" class="part-chip" data-part="optical">حساس RPM</button>
+          <button type="button" class="part-chip" data-part="watt">INA219</button>
+          <button type="button" class="part-chip" data-part="accel">ADXL345</button>
+          <button type="button" class="part-chip" data-part="servo">Servo Brake</button>
+          <button type="button" class="part-chip" data-part="buck">محول الطاقة</button>
+          <button type="button" class="part-chip" data-part="estop">زر الطوارئ</button>
+          <button type="button" class="part-chip" data-part="controls">الأزرار</button>
         </div>
       </div>
-      <aside class="control-card panel" aria-label="لوحة التحكم بالمحاكاة">
-        <div class="section-head"><div><span class="kicker">02 / SCENARIO CONTROL</span><h2>تحكّم في التجربة</h2></div><span class="control-icon" aria-hidden="true">⌘</span></div>
-        <p class="small-muted">اختر حالة تشغيل افتراضية، ثم نفّذ اختبار التحقق النشط لمقارنة استجابة القناتين.</p>
-        <div class="scenario-options" role="group" aria-label="سيناريوهات التشغيل">
-          <button type="button" class="scenario active" data-scenario="normal" aria-pressed="true"><span class="scenario-icon">01</span><span><strong>تشغيل طبيعي</strong><small>NORMAL OPERATION</small></span><span class="scenario-radio"></span></button>
-          <button type="button" class="scenario" data-scenario="physical" aria-pressed="false"><span class="scenario-icon">02</span><span><strong>عطل فيزيائي</strong><small>PHYSICAL FAULT</small></span><span class="scenario-radio"></span></button>
-          <button type="button" class="scenario" data-scenario="spoof" aria-pressed="false"><span class="scenario-icon">03</span><span><strong>تلاعب بالقراءة</strong><small>SENSOR SPOOF</small></span><span class="scenario-radio"></span></button>
-          <button type="button" class="scenario" data-scenario="replay" aria-pressed="false"><span class="scenario-icon">04</span><span><strong>إعادة بث البيانات</strong><small>REPLAY ATTACK</small></span><span class="scenario-radio"></span></button>
+      <aside class="control-panel panel" aria-label="لوحة التحكم بالمجسم">
+        <div class="section-head"><div><span class="section-tag">02 / OPERATING CONSOLE</span><h2>لوحة التحكم والتشغيل</h2></div><span class="micro-pill">SYSTEM CONTROL</span></div>
+        <p class="subtext">شغّل طاقة المنظومة، ثم المحرك، واختر حالة تشغيل لمشاهدة الاستجابة مباشرة على المجسم والقراءات.</p>
+
+        <div class="system-state" aria-live="polite">
+          <span id="stateLamp" class="status-lamp"></span>
+          <span><strong id="systemStateName">الجهاز متوقف</strong><small id="systemStateHelp">اضغط زر الطاقة لتهيئة المنظومة</small></span>
+          <span id="stateMeta" class="state-meta">OFF</span>
         </div>
-        <div class="control-buttons">
-          <button id="challenge-btn" type="button" class="primary-btn"><span class="bolt" aria-hidden="true">◇</span> تنفيذ تحقق نشط <span aria-hidden="true">←</span></button>
-          <button id="reset-btn" type="button" class="secondary-btn" aria-label="إعادة ضبط المحاكاة">↺</button>
+        <div>
+          <div class="control-section-title"><span>التغذية الرئيسية</span><span class="latin">01 / POWER</span></div>
+          <button id="powerToggle" class="power-switch" type="button" aria-pressed="false" style="margin-top:9px">
+            <span>مفتاح طاقة المنظومة <small id="powerStatus">POWER OFF</small></span><span class="switch-track" aria-hidden="true"></span>
+          </button>
         </div>
-        <div class="state-card" aria-live="polite"><div class="state-top"><span>الاستنتاج التوضيحي</span><span id="state-pill" class="status-pill good">متسق</span></div><strong id="state-title">القراءات متوافقة مبدئيًا</strong><p id="state-description">تتوافق قراءة القناة المبلّغ عنها مع الشاهد الفيزيائي ضمن حدود هذه المحاكاة.</p><div class="state-footer"><span>مستوى الاستدلال</span><strong id="state-confidence">مؤشر محاكاة — ليس نسبة دقة</strong></div></div>
+        <div>
+          <div class="control-section-title"><span>التحكم في المحرك</span><span class="latin">02 / MOTOR</span></div>
+          <div class="operation-grid" style="margin-top:9px">
+            <button type="button" class="op-btn start" id="startBtn"><span class="ico" aria-hidden="true">▶</span> بدء التشغيل <small>START</small></button>
+            <button type="button" class="op-btn stop" id="stopBtn"><span class="ico" aria-hidden="true">■</span> إيقاف المحرك <small>STOP</small></button>
+            <button type="button" class="op-btn" id="resetBtn"><span class="ico" aria-hidden="true">↻</span> إعادة الضبط <small>RESET</small></button>
+          </div>
+        </div>
+        <div>
+          <div class="control-section-title"><span>أزرار السيناريوهات</span><span class="latin">03 / SCENARIOS</span></div>
+          <div class="scenario-grid" style="margin-top:9px" role="group" aria-label="سيناريوهات النموذج">
+            <button type="button" class="scenario-btn" data-scenario="physical" aria-pressed="false"><i class="button-lamp red" aria-hidden="true"></i><span><strong>عطل فيزيائي</strong><small>PHYSICAL FAULT</small></span></button>
+            <button type="button" class="scenario-btn" data-scenario="spoof" aria-pressed="false"><i class="button-lamp yellow" aria-hidden="true"></i><span><strong>تلاعب بالقراءة</strong><small>SENSOR SPOOF</small></span></button>
+            <button type="button" class="scenario-btn" data-scenario="replay" aria-pressed="false"><i class="button-lamp blue" aria-hidden="true"></i><span><strong>إعادة بث البيانات</strong><small>REPLAY ATTACK</small></span></button>
+            <button type="button" class="scenario-btn active" data-scenario="normal" aria-pressed="true"><i class="button-lamp green" aria-hidden="true"></i><span><strong>عودة للوضع الطبيعي</strong><small>RESET / NORMAL</small></span></button>
+          </div>
+        </div>
+        <div>
+          <div class="control-section-title"><span>التحقق والحماية</span><span class="latin">04 / VERIFY & SAFETY</span></div>
+          <button type="button" id="challengeBtn" class="wide-btn" style="margin-top:9px">◇ تنفيذ التحقق النشط</button>
+          <div class="emergency-grid" style="margin-top:9px">
+            <button type="button" id="emergencyBtn" class="emergency-btn">● إيقاف طارئ E-STOP</button>
+            <button type="button" id="releaseBtn" class="release-btn" hidden>تحرير زر الطوارئ</button>
+            <span id="emergencyNote" class="muted" style="font-size:.69rem;align-self:center">فصل مستقل لفرع المحرك</span>
+          </div>
+        </div>
+        <div id="demoMsg" class="message" role="status" aria-live="polite">ابدأ من مفتاح الطاقة، ثم اضغط تشغيل المحرك.</div>
+        <div class="status-card" aria-live="polite">
+          <div class="status-card-header"><span>نتيجة التحقق</span><span id="resultPill" class="result-pill neutral">إيقاف</span></div>
+          <h3 id="statusTitle">المنظومة في وضع الإيقاف</h3>
+          <p id="statusDesc">شغّل الطاقة لبدء تجربة تشغيل النموذج.</p>
+        </div>
       </aside>
     </section>
-    <section id="evidence" class="evidence-section" aria-labelledby="evidence-title">
-      <div class="block-heading"><div><span class="kicker">03 / INDEPENDENT EVIDENCE</span><h2 id="evidence-title">ما تقوله القناة وما يشهده الواقع</h2></div><p>المنحنيات والقيم تتغير وفق السيناريو المختار، ولا تُستخدم لتقدير أداء الجهاز الحقيقي.</p></div>
-      <div class="metric-grid">
-        <div class="metric panel"><div class="metric-top"><span><i class="small-circle cyan"></i> Telemetry / ESP32-A</span><span class="metric-tag">مُبلّغ</span></div><div><strong id="reported-rpm">218</strong><span class="unit">RPM</span></div><small>سرعة الدوران المبلّغ عنها</small></div>
-        <div class="metric panel"><div class="metric-top"><span><i class="small-circle amber"></i> Witness / ESP32-B</span><span class="metric-tag">مستقل</span></div><div><strong id="witness-rpm">217</strong><span class="unit">RPM</span></div><small>السرعة المقاسة بصريًا</small></div>
-        <div class="metric panel"><div class="metric-top"><span><i class="small-circle green"></i> INA219</span><span class="metric-tag">مستقل</span></div><div><strong id="current-reading">0.84</strong><span class="unit">A</span></div><small>تيار كهربائي — قيمة افتراضية</small></div>
-        <div class="metric panel"><div class="metric-top"><span><i class="small-circle purple"></i> ADXL345</span><span class="metric-tag">مستقل</span></div><div><strong id="vibration-reading">0.18</strong><span class="unit">a.u.</span></div><small>مؤشر اهتزاز مُطبّع افتراضي</small></div>
+
+    <section id="readings" class="data-section" aria-labelledby="dataTitle">
+      <div class="block-head">
+        <div><span class="section-tag">03 / OPERATIONAL TELEMETRY</span><h2 id="dataTitle">قراءات النظام والاستجابة</h2></div>
+        <p>قارن السرعة المبلّغ عنها بالقياس المستقل، وتابع مؤشرات التيار والاهتزاز عند تغيير الحالة.</p>
       </div>
-      <div class="chart-panel panel"><div class="chart-header"><div><span class="kicker">LIVE / SYNTHETIC DATA STREAM</span><h3>مقارنة السرعة مع مرور الوقت</h3></div><div class="legend"><span><i class="small-circle cyan"></i> القراءة المُبلّغ عنها</span><span><i class="small-circle amber"></i> الشاهد المستقل</span></div></div><div class="chart-space"><canvas id="trend-chart" role="img" aria-label="مخطط بياني لمحاكاة سرعة الدوران المبلّغ عنها ومقارنتها بقياس مستقل"></canvas></div><p class="chart-caption"><span id="chart-annotation">بيانات اصطناعية محدثة لحظيًا لأغراض الشرح.</span><span>المحور الرأسي: RPM · الأفقي: زمن المحاكاة</span></p></div>
-    </section>
-    <section id="architecture" class="architecture-section" aria-labelledby="architecture-title"><div class="block-heading"><div><span class="kicker">04 / HOW SIDQ WORKS</span><h2 id="architecture-title">المبدأ المعماري</h2></div><p>استقلال مصدر الشهادة هو الفارق الجوهري بين مجرد مراقبة البيانات والتحقق منها.</p></div>
-      <div class="architecture-grid">
-        <article class="architecture-card panel" data-component="nodeA" tabindex="0"><span class="arch-num">A / 01</span><div class="arch-icon tele">A</div><h3>قناة البيانات</h3><p>ESP32-A يجمع قراءة المشفّر ويُمثل قناة Telemetry التي قد تكون بياناتها غير موثوقة أثناء السيناريوهات الهجومية.</p><span class="arch-tag">Reported Signal</span></article>
-        <article class="architecture-card panel" data-component="nodeB" tabindex="0"><span class="arch-num">B / 02</span><div class="arch-icon wit">B</div><h3>الشاهد الفيزيائي المستقل</h3><p>ESP32-B يستقبل شواهد منفصلة للسرعة البصرية والطاقة والاهتزاز، دون الاعتماد على القيمة المبلّغ عنها من القناة A.</p><span class="arch-tag">Independent Evidence</span></article>
-        <article class="architecture-card panel" data-component="sensors" tabindex="0"><span class="arch-num">C / 03</span><div class="arch-icon verdict">✓</div><h3>فحص الاتساق والتحقق النشط</h3><p>تُقارن الأدلة، ويمكن تطبيق تحدٍّ فيزيائي محدود داخل المحاكاة لاختبار استجابة القراءات؛ وقد تبقى النتيجة غير محسومة.</p><span class="arch-tag">Interpretable Assessment</span></article>
+      <div class="metrics">
+        <div class="metric panel"><div class="metric-label"><span><i></i>ESP32-A</span><small>TELEMETRY</small></div><strong id="reportRPM">0</strong> <span class="unit">RPM</span><p>قراءة السرعة المبلّغ عنها</p></div>
+        <div class="metric panel"><div class="metric-label"><span><i class="gold"></i>ESP32-B</span><small>OPTICAL</small></div><strong id="witnessRPM">0</strong> <span class="unit">RPM</span><p>شاهد سرعة الدوران المستقل</p></div>
+        <div class="metric panel"><div class="metric-label"><span><i class="green"></i>INA219</span><small>POWER</small></div><strong id="wattCurrent">0.00</strong> <span class="unit">A</span><p>مؤشر تيار فرع المحرك</p></div>
+        <div class="metric panel"><div class="metric-label"><span><i class="purple"></i>ADXL345</span><small>VIBRATION</small></div><strong id="accelVib">0.00</strong> <span class="unit">a.u.</span><p>مؤشر الاهتزاز</p></div>
+      </div>
+      <div class="chart-panel panel">
+        <div class="chart-header"><h3>منحنى السرعة أثناء التشغيل</h3><div class="chart-legend"><span><i></i> Telemetry / A</span><span><i class="gold"></i> Independent Witness / B</span></div></div>
+        <div class="chart-frame"><canvas id="telemetry-chart" role="img" aria-label="منحنى تفاعلي يوضح مقارنة بيانات السرعة لقناتي النظام"></canvas></div>
+        <p class="chart-footer">المحور الرأسي: السرعة RPM · المحور الأفقي: زمن التشغيل بالثواني</p>
       </div>
     </section>
-    <footer class="footer"><div class="footer-brand">صِدق <b>/ SIDQ</b> <span>· MIDA V1</span></div><p>نموذج تفاعلي مفاهيمي لأغراض العرض والتطوير، دون ادعاء تحقق مختبري أو اعتماد تشغيلي.</p><a href="https://github.com/aaljohani2/sidq-interactive-demo" target="_blank" rel="noopener noreferrer">المستودع على GitHub ↗</a></footer>
+
+    <section id="hardware" class="detail-section" aria-labelledby="hardwareTitle">
+      <div class="block-head">
+        <div><span class="section-tag">04 / COMPONENTS & CONNECTIONS</span><h2 id="hardwareTitle">المكونات والموصلات</h2></div>
+        <p>اختر القطعة أو مسار التوصيل من هنا، وستظهر في المجسم ثلاثي الأبعاد.</p>
+      </div>
+      <div class="detail-grid">
+        <article class="component-card panel">
+          <span class="section-tag">SELECTED COMPONENT</span>
+          <h3 id="partCardTitle">محرك FIT0186 مع المشفّر</h3>
+          <p id="partCardDesc">محرك 12V مع قرص القياس المستقل.</p>
+          <div id="partCardMeta" class="component-meta"></div>
+        </article>
+        <article class="wiring-card panel">
+          <div class="control-section-title"><span>عرض مسارات التوصيل</span><span class="latin">WIRING LAYERS</span></div>
+          <div class="view-group" style="margin:12px 0" role="group" aria-label="اختيار مسار توصيل">
+            <button type="button" class="toolbar-btn active" data-wire="all">الكل</button>
+            <button type="button" class="toolbar-btn" data-wire="power">الطاقة</button>
+            <button type="button" class="toolbar-btn" data-wire="reported">Telemetry</button>
+            <button type="button" class="toolbar-btn" data-wire="witness">Witness</button>
+            <button type="button" class="toolbar-btn" data-wire="logic">التحكم و5V</button>
+          </div>
+          <p id="wireHelp" class="muted" style="font-size:.73rem;margin-bottom:13px">تظهر موصلات القدرة والإشارات والمستشعرات على قاعدة الأكريلك.</p>
+          <div class="wiring-rows">
+            <div class="wire-row"><strong><i class="wire-marker power"></i>مسار القدرة / 12V</strong><small>التغذية، الحماية، قيادة المحرك</small></div>
+            <div class="wire-row"><strong><i class="wire-marker logic"></i>سكة التحكم / 5V</strong><small>المحوّل، السيرفو، الأزرار</small></div>
+            <div class="wire-row"><strong><i class="wire-marker reported"></i>Telemetry</strong><small>Hall Encoder → ESP32-A</small></div>
+            <div class="wire-row"><strong><i class="wire-marker witness"></i>Independent Witness</strong><small>Optical / INA219 / ADXL345 → ESP32-B</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="operation" class="workflow-section" aria-labelledby="operationTitle">
+      <div class="block-head">
+        <div><span class="section-tag">05 / OPERATING SEQUENCE</span><h2 id="operationTitle">كيف تعمل تجربة صِدق؟</h2></div>
+        <p>تسلسل واضح من تشغيل الطاقة إلى قراءة نتيجة التحقق، مع إمكانية إيقاف المحرك أو فصل الطوارئ.</p>
+      </div>
+      <div class="flow">
+        <article class="flow-step panel" data-step="1"><span class="flow-number">01 / POWER</span><h3>تشغيل الطاقة</h3><p>تهيئة وحدات التحكم والحساسات.</p></article>
+        <article class="flow-step panel" data-step="2"><span class="flow-number">02 / RUN</span><h3>بدء المحرك</h3><p>تدوير الأصل الفيزيائي وعرض القراءات.</p></article>
+        <article class="flow-step panel"><span class="flow-number">03 / SCENARIO</span><h3>اختيار الحالة</h3><p>عطل، تلاعب، إعادة بث، أو تشغيل طبيعي.</p></article>
+        <article class="flow-step panel" data-step="3"><span class="flow-number">04 / VERIFY</span><h3>تحقق نشط</h3><p>تغيير التشغيل ومقارنة استجابة الشواهد.</p></article>
+        <article class="flow-step panel" data-step="4"><span class="flow-number">05 / ASSESS</span><h3>قراءة النتيجة</h3><p>فهم الاتساق أو التعارض واتخاذ الإجراء.</p></article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>صِدق / SIDQ · MIDA</strong>
+      <span>Independent Physical Witness · Interactive Prototype Experience</span>
+      <a href="#prototype">العودة للمجسم ↑</a>
+    </footer>
   </main>
 </body>
 </html>
