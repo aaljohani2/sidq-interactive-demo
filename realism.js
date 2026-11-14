@@ -89,13 +89,13 @@ export async function createRealisticPresentation({THREE,scene,root,groups,rende
     plane.rotation.x=-Math.PI/2;plane.castShadow=false;return plane;
   }
   const labels=[
-    [groups.espA,'TELEMETRY','ESP32-A',0,.25,-.21,1,.30],
-    [groups.espB,'WITNESS','ESP32-B',0,.25,-.21,1,.30],
-    [groups.driver,'DRIVER','PWM / MOTOR',0,.26,-.38,.9,.26],
-    [groups.watt,'INA219','CURRENT',0,.25,-.18,.68,.22],
-    [groups.accel,'ADXL345','VIBRATION',0,.21,-.19,.72,.22],
-    [groups.buck,'DC-DC','5V RAIL',0,.26,-.3,.72,.23],
-    [groups.optical,'RPM','OPTICAL',0,.22,-.12,.51,.18],
+    [groups.espA,'TELEMETRY','ESP32-A',.48,-.008,.28,.78,.19],
+    [groups.espB,'WITNESS','ESP32-B',.48,-.008,.28,.78,.19],
+    [groups.driver,'DRIVER','PWM / MOTOR',-.48,-.005,-.48,.74,.18],
+    [groups.watt,'INA219','CURRENT',-.12,-.008,-.29,.52,.14],
+    [groups.accel,'ADXL345','VIBRATION',0,-.008,-.25,.57,.15],
+    [groups.buck,'DC-DC','5V RAIL',.12,-.008,-.34,.7,.14],
+    [groups.optical,'RPM','OPTICAL',0,.067,-.12,.43,.12],
     [groups.servo,'SERVO','LOAD',0,.55,.06,.78,.24]
   ];
   for(const a of labels){if(a[0])flatLabel(...a);}
