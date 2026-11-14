@@ -81,3 +81,16 @@ body{background:radial-gradient(ellipse 95% 50% at 69% -12%,#233b49 0%,#0c1b26 5
 @media(max-width:590px){.readout-mini-toolbar{font-size:.63rem}.readout-toggle{display:block}.sensor-readout{border-radius:7px;box-shadow:0 5px 16px #0006}.sensor-readout-number{font-size:1.05rem}.sensor-readout-heading{font-size:.57rem}.sensor-readout-source{font-size:.46rem}.sensor-readout-unit{font-size:.49rem}}
 @media(max-width:390px){.sensor-readout{padding:4px 7px}.sensor-readout-heading{font-size:.53rem}.sensor-readout-number{font-size:1rem}.sensor-readout-source{font-size:.43rem}}
 @media(prefers-reduced-motion:reduce){.sensor-readout{transition:none}}
+
+/* Investor-first opening: business proposition and a one-click scenario */
+.hero-facts-value{gap:10px;align-items:stretch}
+.hero-facts-value .fact{flex:1 1 160px;min-width:135px;padding:10px 13px;border-color:#365863;background:linear-gradient(145deg,rgba(23,56,65,.72),rgba(11,34,46,.65))}
+.hero-facts-value .fact small{display:block;font-size:.68rem;color:#93b6b9;letter-spacing:.1px}
+.hero-facts-value .fact strong{font:600 .88rem/1.8 'IBM Plex Sans Arabic',Tahoma,sans-serif;color:#e4f4f1;letter-spacing:0;direction:rtl;text-align:right}
+.hero-cta{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-top:17px}
+.showcase-btn{display:flex;justify-content:space-between;align-items:center;gap:17px;border:1px solid #6bb8aa;border-radius:9px;background:#69c9b9;color:#092a30;padding:10px 17px;font-size:.87rem;font-weight:700;min-height:42px;transition:background .2s,transform .2s}
+.showcase-btn:hover{background:#8ee2d3;transform:translateY(-1px)}
+.showcase-btn span{font-size:1rem}
+.hero-how{color:#bdd5d7;border-bottom:1px solid #658f95;font-size:.82rem;padding-bottom:2px}
+.hero-how:hover{color:#a7f1e4;border-color:#a7f1e4}
+@media(max-width:590px){.hero-facts-value .fact{flex-basis:100%;padding:7px 11px}.hero-facts-value .fact strong{font-size:.79rem;line-height:1.5}.hero-cta{margin-top:14px;gap:12px}.showcase-btn{width:100%}}
