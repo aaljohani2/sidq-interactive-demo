@@ -50,3 +50,34 @@ body{background:radial-gradient(ellipse 95% 50% at 69% -12%,#233b49 0%,#0c1b26 5
 .state-meta{color:#89d7c9}
 .chart-panel,.metric,.component-card,.wiring-card{background:linear-gradient(152deg,#122a36,#0d202a)}
 @media(max-width:700px){.presentation-modes{flex-wrap:wrap;padding:9px;gap:8px}.presentation-mode-title{font-size:.57rem}.presentation-modes .toolbar-btn{padding:5px 9px;font-size:.67rem}.thermal-legend{top:67px;left:9px;min-width:125px;padding:7px 9px}}
+
+
+/* In-scene instrumentation: readable photographic data placards */
+.readout-mini-toolbar{height:28px;margin:-2px 1px 7px;display:flex;align-items:center;justify-content:space-between;gap:9px;color:#9cb5be;font-size:.69rem}
+.readout-mini-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#78d7bc;margin-inline-end:6px;box-shadow:0 0 9px #55bbac55}
+.readout-toggle{display:none;border:1px solid #52717c;border-radius:7px;background:#193642;padding:4px 9px;color:#c6dedc;font-size:.68rem}
+.readout-toggle:hover{background:#214653}
+.scene-callouts{position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none;isolation:isolate}
+.scene-callouts[hidden]{display:none}
+.sensor-lines{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:0;shape-rendering:geometricPrecision}
+.sensor-connector{vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(0,0,0,.94))}
+.sensor-connector-back{stroke:#091923;stroke-width:4.5;stroke-linejoin:round;stroke-linecap:round;opacity:.85;vector-effect:non-scaling-stroke}
+.sensor-anchor-pin{filter:drop-shadow(0 0 5px rgba(128,207,197,.4))}
+.sensor-anchor-halo{stroke-width:1.2;vector-effect:non-scaling-stroke}
+.sensor-readout{--metric-color:#84d9cf;position:absolute;top:0;left:0;z-index:1;pointer-events:auto;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-around;text-align:left;direction:ltr;padding:6px 11px;color:#edf6f6;border:1px solid #405965;border-left:3px solid var(--metric-color);border-radius:9px;background:linear-gradient(108deg,rgba(12,31,43,.98),rgba(13,29,40,.92));backdrop-filter:blur(8px);box-shadow:0 7px 25px rgba(0,0,0,.36);transition:opacity .18s,border-color .18s,background .18s;will-change:transform}
+.sensor-readout[hidden]{display:none}
+.sensor-readout:hover,.sensor-readout:focus-visible{border-color:var(--metric-color);background:rgba(20,48,58,.98)}
+.sensor-readout--active{border-color:var(--metric-color);background:linear-gradient(100deg,rgba(25,63,66,.99),rgba(14,36,44,.97));box-shadow:0 0 0 1px rgba(141,204,190,.1),0 9px 28px rgba(0,0,0,.35)}
+.sensor-readout--dim{opacity:.7}
+.sensor-readout--idle{opacity:.79}
+.sensor-readout--dim.sensor-readout--idle{opacity:.66}
+.sensor-readout-top{width:100%;display:flex;align-items:center;gap:7px;white-space:nowrap;min-width:0}
+.sensor-readout-led{width:5px;height:5px;flex:0 0 5px;border-radius:50%;background:var(--metric-color);box-shadow:0 0 7px var(--metric-color)}
+.sensor-readout-heading{color:#c2d5d9;font:600 .66rem 'Space Grotesk',Arial,sans-serif;letter-spacing:.1px;overflow:hidden;text-overflow:ellipsis}
+.sensor-readout-number{font:600 1.27rem/1.08 'Space Grotesk',Arial,sans-serif;color:#f3f9f8;display:flex;align-items:baseline;gap:6px;white-space:nowrap;letter-spacing:-.45px}
+.sensor-readout-unit{font:500 .59rem 'Space Grotesk',sans-serif;color:#a3bac4;letter-spacing:0}
+.sensor-readout-source{font:500 .52rem/1.1 'Space Grotesk',Arial,sans-serif;color:#8faeba;white-space:nowrap;letter-spacing:.14px}
+@media(max-width:790px){.sensor-readout{padding:5px 8px}.sensor-readout-number{font-size:1.13rem}.sensor-readout-heading{font-size:.61rem}.sensor-readout-source{font-size:.48rem}}
+@media(max-width:590px){.readout-mini-toolbar{font-size:.63rem}.readout-toggle{display:block}.sensor-readout{border-radius:7px;box-shadow:0 5px 16px #0006}.sensor-readout-number{font-size:1.05rem}.sensor-readout-heading{font-size:.57rem}.sensor-readout-source{font-size:.46rem}.sensor-readout-unit{font-size:.49rem}}
+@media(max-width:390px){.sensor-readout{padding:4px 7px}.sensor-readout-heading{font-size:.53rem}.sensor-readout-number{font-size:1rem}.sensor-readout-source{font-size:.43rem}}
+@media(prefers-reduced-motion:reduce){.sensor-readout{transition:none}}
