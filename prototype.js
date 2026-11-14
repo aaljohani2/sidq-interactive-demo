@@ -276,7 +276,8 @@ async function initScene(){
     orbit.enableDamping=true;orbit.dampingFactor=.065;orbit.enablePan=false;
     orbit.minDistance=8;orbit.maxDistance=27;orbit.minPolarAngle=.18;orbit.maxPolarAngle=1.48;
     orbit.target.set(0,.16,0);
-    const targetCamera={pos:new THREE.Vector3(10.5,10.5,13.6),look:new THREE.Vector3(0,.16,0)};
+    let cameraTransition=null;
+    orbit.addEventListener('start',()=>{cameraTransition=null;});
     const lightA=new THREE.HemisphereLight(0xc6eff7,0x0d1929,2.1);scene.add(lightA);
     const sun=new THREE.DirectionalLight(0xe8ffff,2.25);sun.position.set(-2,11,7);scene.add(sun);
     const highlightLight=new THREE.PointLight(0x57ead7,32,15);highlightLight.position.set(-5,5,-3);scene.add(highlightLight);
@@ -484,7 +485,7 @@ async function initScene(){
         exploded:[13,13,15]
       };
       const p=points[v]||points.isometric;
-      targetCamera.pos.set(...p);targetCamera.look.set(0,.16,0);
+      cameraTransition={from:camera.position.clone(),to:new THREE.Vector3(...p),fromLook:orbit.target.clone(),toLook:new THREE.Vector3(0,.16,0),elapsed:0};
     }
     state.setCamera=setCameraPreset;
     function resize(){
@@ -545,8 +546,13 @@ async function initScene(){
           g.position.y+= (goal-g.position.y)*Math.min(1,animateOffset);
         }
       }else for(const g of Object.values(groups))g.position.y+=(0-g.position.y)*Math.min(1,dt*5);
-      camera.position.lerp(targetCamera.pos,Math.min(1,dt*3.2));
-      orbit.target.lerp(targetCamera.look,Math.min(1,dt*3.2));
+      if(cameraTransition){
+        cameraTransition.elapsed+=dt;
+        const t=Math.min(1,cameraTransition.elapsed/.7),e=t*t*(3-2*t);
+        camera.position.lerpVectors(cameraTransition.from,cameraTransition.to,e);
+        orbit.target.lerpVectors(cameraTransition.fromLook,cameraTransition.toLook,e);
+        if(t>=1)cameraTransition=null;
+      }
       orbit.update();renderer.render(scene,camera);
     };
     state.drawScene(0,state);
