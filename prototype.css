@@ -215,3 +215,22 @@ body{background:radial-gradient(ellipse 95% 50% at 69% -12%,#233b49 0%,#0c1b26 5
 @media(min-width:591px){
   .viewer-hint-mobile{display:none}
 }
+
+
+/* Readability and tablet touch corrections */
+@media(max-width:590px){
+  .sensor-readout-heading{font-size:.65rem}
+  .sensor-readout-source{font-size:.55rem}
+  .sensor-readout-unit{font-size:.56rem}
+  .sensor-readout-number{font-size:1.16rem}
+  .sensor-readout--dim{opacity:.85}
+  .sensor-readout--idle{opacity:.9}
+}
+@media(max-width:390px){
+  .sensor-readout-heading{font-size:.61rem}
+  .sensor-readout-source{font-size:.51rem}
+  .sensor-readout-number{font-size:1.08rem}
+}
+@media(hover:none) and (pointer:coarse){
+  #sceneCanvas{touch-action:none}
+}
