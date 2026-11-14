@@ -477,7 +477,8 @@ async function initScene(){
     }
     state.setCamera=setCameraPreset;
     function resize(){
-      const w=wrap.clientWidth,h=wrap.clientHeight;
+      const w=Math.round(canvas.clientWidth||wrap.clientWidth);
+      const h=Math.round(canvas.clientHeight||wrap.clientHeight);
       if(!w||!h)return;
       renderer.setSize(w,h,false);
       camera.aspect=w/h;camera.updateProjectionMatrix();
@@ -520,7 +521,7 @@ async function initScene(){
     let sensorOverlay=null;
     try{
       const {createSensorCallouts}=await import('./sensor-callouts.js');
-      sensorOverlay=createSensorCallouts({THREE,camera,scene,groups,container:wrap,onSelect:choosePart,getState:()=>state});
+      sensorOverlay=createSensorCallouts({THREE,camera,scene,root,canvas,groups,container:wrap,onSelect:choosePart,getState:()=>state});
     }catch(error){console.warn('Scene annotations unavailable:',error);}
     let clock=0;
     state.drawScene=(dt,s)=>{
