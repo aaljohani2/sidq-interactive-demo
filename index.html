@@ -21,9 +21,8 @@
     </a>
     <nav class="top-links" aria-label="أقسام العرض">
       <a href="#prototype">المجسم التفاعلي</a>
-      <a href="#readings">قراءات التشغيل</a>
+      <a href="#operation">آلية العمل</a>
       <a href="#hardware">المكونات والتوصيلات</a>
-      <a href="#operation">طريقة التشغيل</a>
     </nav>
     <span class="header-version">MIDA · PROTOTYPE V1</span>
   </header>
@@ -33,11 +32,10 @@
         <span class="overline">SIDQ / MIDA · INTERACTIVE HARDWARE EXPERIENCE</span>
         <h1 id="heroTitle">صِدق. <em>شاهد فيزيائي مستقل</em> يجعل البيانات قابلة للتحقق.</h1>
         <p>منصة تجمع بين قراءة الجهاز التشغيلية وشواهد فيزيائية مستقلة للسرعة والطاقة والاهتزاز؛ لتوضيح العلاقة بين سلوك المعدّة وصحة البيانات المبلّغ عنها، مع سيناريوهات تفاعلية تشرح اكتشاف التعارض.</p>
-        <div class="hero-facts">
-          <div class="fact"><strong>60 × 40 <small>cm</small></strong><small>قاعدة الأكريلك</small></div>
-          <div class="fact"><strong>2 × ESP32-S3</strong><small>قناتا قياس مستقلتان</small></div>
-          <div class="fact"><strong>4 SCENARIOS</strong><small>أوضاع اختبار قابلة للتبديل</small></div>
-          <div class="fact"><strong>12V / DC</strong><small>منصة محرك اختبار</small></div>
+        <div class="hero-facts hero-facts-value">
+          <div class="fact"><small>التحدي</small><strong>البيانات قد لا تعكس الواقع</strong></div>
+          <div class="fact"><small>الحل</small><strong>شاهد فيزيائي مستقل</strong></div>
+          <div class="fact"><small>القيمة</small><strong>تحقق أوضح قبل القرار</strong></div>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -158,21 +156,17 @@
       </aside>
     </section>
 
-    <section id="readings" class="data-section" aria-labelledby="dataTitle">
+    <section id="operation" class="workflow-section" aria-labelledby="operationTitle">
       <div class="block-head">
-        <div><span class="section-tag">03 / OPERATIONAL TELEMETRY</span><h2 id="dataTitle">قراءات النظام والاستجابة</h2></div>
-        <p>قارن السرعة المبلّغ عنها بالقياس المستقل، وتابع مؤشرات التيار والاهتزاز عند تغيير الحالة.</p>
+        <div><span class="section-tag">03 / HOW IT WORKS</span><h2 id="operationTitle">كيف تعمل تجربة صِدق؟</h2></div>
+        <p>خمس خطوات تُظهر كيف يقارن صِدق البيانات التشغيلية بالسلوك الفيزيائي المستقل.</p>
       </div>
-      <div class="metrics">
-        <div class="metric panel"><div class="metric-label"><span><i></i>ESP32-A</span><small>TELEMETRY</small></div><strong id="reportRPM">0</strong> <span class="unit">RPM</span><p>قراءة السرعة المبلّغ عنها</p></div>
-        <div class="metric panel"><div class="metric-label"><span><i class="gold"></i>ESP32-B</span><small>OPTICAL</small></div><strong id="witnessRPM">0</strong> <span class="unit">RPM</span><p>شاهد سرعة الدوران المستقل</p></div>
-        <div class="metric panel"><div class="metric-label"><span><i class="green"></i>INA219</span><small>POWER</small></div><strong id="wattCurrent">0.00</strong> <span class="unit">A</span><p>مؤشر تيار فرع المحرك</p></div>
-        <div class="metric panel"><div class="metric-label"><span><i class="purple"></i>ADXL345</span><small>VIBRATION</small></div><strong id="accelVib">0.00</strong> <span class="unit">a.u.</span><p>مؤشر الاهتزاز</p></div>
-      </div>
-      <div class="chart-panel panel">
-        <div class="chart-header"><h3>منحنى السرعة أثناء التشغيل</h3><div class="chart-legend"><span><i></i> Telemetry / A</span><span><i class="gold"></i> Independent Witness / B</span></div></div>
-        <div class="chart-frame"><canvas id="telemetry-chart" role="img" aria-label="منحنى تفاعلي يوضح مقارنة بيانات السرعة لقناتي النظام"></canvas></div>
-        <p class="chart-footer">المحور الرأسي: السرعة RPM · المحور الأفقي: زمن التشغيل بالثواني</p>
+      <div class="flow">
+        <article class="flow-step panel" data-step="1"><span class="flow-number">01 / POWER</span><h3>تشغيل الطاقة</h3><p>تهيئة وحدات التحكم والحساسات.</p></article>
+        <article class="flow-step panel" data-step="2"><span class="flow-number">02 / RUN</span><h3>بدء المحرك</h3><p>تدوير الأصل الفيزيائي وعرض القراءات.</p></article>
+        <article class="flow-step panel"><span class="flow-number">03 / SCENARIO</span><h3>اختيار الحالة</h3><p>عطل، تلاعب، إعادة بث، أو تشغيل طبيعي.</p></article>
+        <article class="flow-step panel" data-step="3"><span class="flow-number">04 / VERIFY</span><h3>تحقق نشط</h3><p>تغيير التشغيل ومقارنة استجابة الشواهد.</p></article>
+        <article class="flow-step panel" data-step="4"><span class="flow-number">05 / ASSESS</span><h3>قراءة النتيجة</h3><p>فهم الاتساق أو التعارض واتخاذ الإجراء.</p></article>
       </div>
     </section>
 
@@ -205,20 +199,6 @@
             <div class="wire-row"><strong><i class="wire-marker witness"></i>Independent Witness</strong><small>Optical / INA219 / ADXL345 → ESP32-B</small></div>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section id="operation" class="workflow-section" aria-labelledby="operationTitle">
-      <div class="block-head">
-        <div><span class="section-tag">05 / OPERATING SEQUENCE</span><h2 id="operationTitle">كيف تعمل تجربة صِدق؟</h2></div>
-        <p>تسلسل واضح من تشغيل الطاقة إلى قراءة نتيجة التحقق، مع إمكانية إيقاف المحرك أو فصل الطوارئ.</p>
-      </div>
-      <div class="flow">
-        <article class="flow-step panel" data-step="1"><span class="flow-number">01 / POWER</span><h3>تشغيل الطاقة</h3><p>تهيئة وحدات التحكم والحساسات.</p></article>
-        <article class="flow-step panel" data-step="2"><span class="flow-number">02 / RUN</span><h3>بدء المحرك</h3><p>تدوير الأصل الفيزيائي وعرض القراءات.</p></article>
-        <article class="flow-step panel"><span class="flow-number">03 / SCENARIO</span><h3>اختيار الحالة</h3><p>عطل، تلاعب، إعادة بث، أو تشغيل طبيعي.</p></article>
-        <article class="flow-step panel" data-step="3"><span class="flow-number">04 / VERIFY</span><h3>تحقق نشط</h3><p>تغيير التشغيل ومقارنة استجابة الشواهد.</p></article>
-        <article class="flow-step panel" data-step="4"><span class="flow-number">05 / ASSESS</span><h3>قراءة النتيجة</h3><p>فهم الاتساق أو التعارض واتخاذ الإجراء.</p></article>
       </div>
     </section>
 
