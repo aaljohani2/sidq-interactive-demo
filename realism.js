@@ -211,11 +211,16 @@ export async function createRealisticPresentation({THREE,scene,root,groups,rende
   const shimmer=add(new THREE.PlaneGeometry(1.4,1.4,10,16),shimmerMaterial,groups.motor,0,2.15,.26);
   shimmer.castShadow=false;shimmer.receiveShadow=false;
   const sceneLabels=[];
-  root.traverse(o=>{if(o.isSprite&&o!==hotspots[0]&&o!==hotspots[1]&&o!==hotspots[2])sceneLabels.push(o);});
+  const debugGrids=[];
+  root.traverse(o=>{
+    if(o.isSprite&&o!==hotspots[0]&&o!==hotspots[1]&&o!==hotspots[2])sceneLabels.push(o);
+    if(o.isGridHelper)debugGrids.push(o);
+  });
   let mode='realistic',heat=0,clock=0;
   function setMode(next){
     mode=['realistic','thermal','technical'].includes(next)?next:'realistic';
     for(const item of sceneLabels)item.visible=mode==='technical';
+    for(const item of debugGrids)item.visible=mode==='technical';
     focusRing.visible=mode==='technical';
   }
   function update(dt,s){
