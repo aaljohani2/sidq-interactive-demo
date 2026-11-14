@@ -4,7 +4,7 @@ const el = id => document.getElementById(id);
 const state = {
   power:false, running:false, emergency:false, scenario:'normal', challenge:false,
   challengeCompleted:false, challengeStart:0, elapsed:0, sampleTime:0, lastFrame:0,
-  view:'isometric', wireView:'all', visualMode:'realistic', focus:'motor', chart:[],
+  view:'isometric', wireView:'all', visualMode:'realistic', focus:'motor',
   metrics:{reported:0,witness:0,current:0,vibration:0},
   drawScene:null, setCamera:null, showWireGroups:null, setFocus3D:null, setVisualMode:null,
   lastMessage:'ابدأ من مفتاح الطاقة، ثم اضغط تشغيل المحرك.'
@@ -208,54 +208,16 @@ function sampleAt(t){
   if(s==='spoof')return {reported:220+.5*Math.sin(t*.7),witness:146+noise-change*.8,current:1.41+.04*Math.sin(t*1.1),vibration:.42+.022*Math.sin(t*1.2)};
   return {reported:219,witness:219+noise*.8-change,current:.84+.02*Math.sin(t)+change*.002,vibration:.18+.015*Math.sin(t*.8)};
 }
-function updateMeters(){
-  const m=state.metrics;
-  el('reportRPM').textContent=Math.max(0,Math.round(m.reported));
-  el('witnessRPM').textContent=Math.max(0,Math.round(m.witness));
-  el('wattCurrent').textContent=m.current.toFixed(2);
-  el('accelVib').textContent=m.vibration.toFixed(2);
+function updateClock(){
   const sec=Math.floor(state.elapsed);
   el('clock').textContent='T+'+String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
 }
-const graph=el('telemetry-chart'),ctx=graph.getContext('2d');
-function paintChart(){
-  if(!ctx)return;
-  const bounds=graph.getBoundingClientRect();
-  if(!bounds.width||!bounds.height)return;
-  const dpr=Math.min(window.devicePixelRatio||1,2),w=bounds.width,h=bounds.height;
-  if(graph.width!==Math.round(w*dpr)||graph.height!==Math.round(h*dpr)){
-    graph.width=Math.round(w*dpr);graph.height=Math.round(h*dpr);
-  }
-  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
-  const pad={t:10,r:10,b:27,l:42},pw=w-pad.l-pad.r,ph=h-pad.t-pad.b;
-  const y=v=>pad.t+(280-v)/280*ph,x=i=>pad.l+i/Math.max(1,state.chart.length-1)*pw;
-  ctx.font='11px Space Grotesk, sans-serif';ctx.textAlign='right';ctx.textBaseline='middle';
-  for(let k=0;k<=4;k++){
-    const v=k*70,yy=y(v);
-    ctx.beginPath();ctx.strokeStyle='#55708038';ctx.lineWidth=1;ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();
-    ctx.fillStyle='#7f9ead';ctx.fillText(String(v),pad.l-9,yy);
-  }
-  ctx.textAlign='center';ctx.textBaseline='top';
-  const first=state.chart[0]?.t||0,last=state.chart[state.chart.length-1]?.t||0;
-  for(let i=0;i<=4;i++){ctx.fillText(Math.round(first+(last-first)*i/4)+'s',pad.l+pw*i/4,h-pad.b+8);}
-  for(const series of [{key:'witness',color:'#e9bd78'},{key:'reported',color:'#53e4d6'}]){
-    if(state.chart.length<2)continue;
-    ctx.beginPath();
-    state.chart.forEach((pt,i)=>i===0?ctx.moveTo(x(i),y(pt[series.key])):ctx.lineTo(x(i),y(pt[series.key])));
-    ctx.strokeStyle=series.color;ctx.lineWidth=2.2;ctx.lineJoin='round';ctx.stroke();
-    const pos=state.chart.length-1,yy=y(state.chart[pos][series.key]);
-    ctx.beginPath();ctx.arc(x(pos),yy,3,0,Math.PI*2);ctx.fillStyle=series.color;ctx.fill();
-  }
-}
-window.addEventListener('resize',paintChart);
 function animate(now){
   const dt=Math.min(Math.max((now-state.lastFrame)/1000,0)||0,.065);
   state.lastFrame=now;state.elapsed+=dt;
   if(now-state.sampleTime>175){
     state.sampleTime=now;state.metrics=sampleAt(state.elapsed);
-    state.chart.push({t:state.elapsed,...state.metrics});
-    if(state.chart.length>85)state.chart.shift();
-    updateMeters();paintChart();
+    updateClock();
   }
   if(state.challenge&&state.elapsed-state.challengeStart>=5){
     state.challenge=false;state.challengeCompleted=true;
