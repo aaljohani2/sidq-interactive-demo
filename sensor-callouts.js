@@ -22,6 +22,10 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
   ];
 
   const entries = metrics.map(metric => {
+    const pathBack = document.createElementNS(ns, 'path');
+    pathBack.setAttribute('class', 'sensor-connector-back');
+    pathBack.setAttribute('fill', 'none');
+    svg.append(pathBack);
     const path = document.createElementNS(ns, 'path');
     path.setAttribute('class', 'sensor-connector');
     path.setAttribute('stroke', metric.tint);
@@ -56,7 +60,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     button.querySelector('.sensor-readout-source').textContent = metric.source;
     button.addEventListener('click', () => onSelect(metric.part));
     layer.append(button);
-    return {...metric,button,path,halo,pin,value:button.querySelector('.sensor-readout-value')};
+    return {...metric,button,pathBack,path,halo,pin,value:button.querySelector('.sensor-readout-value')};
   });
 
   // The mode toggle is available on narrower screens, where a compact,
@@ -161,6 +165,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     for(const entry of entries) {
       const isVisible=visible.has(entry.key);
       entry.button.hidden=!isVisible;
+      entry.pathBack.style.display=isVisible?'':'none';
       entry.path.style.display=isVisible?'':'none';
       entry.halo.style.display=isVisible?'':'none';
       entry.pin.style.display=isVisible?'':'none';
@@ -168,7 +173,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
       const anchor=positionOnScreen(entry,width,height);
       if(!anchor||!anchor.inView){
         entry.button.hidden=true;
-        entry.path.style.display='none';entry.halo.style.display='none';entry.pin.style.display='none';
+        entry.pathBack.style.display='none';entry.path.style.display='none';entry.halo.style.display='none';entry.pin.style.display='none';
         continue;
       }
       results.push({...entry,anchor});
@@ -204,6 +209,8 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
       item.button.classList.toggle('sensor-readout--active',focus);
       item.button.classList.toggle('sensor-readout--dim',dimmed);
       item.button.classList.toggle('sensor-readout--idle',!state.power||!state.running);
+      item.pathBack.setAttribute('d',pathD);
+      item.pathBack.setAttribute('opacity',dimmed?'.36':'.78');
       item.path.setAttribute('d',pathD);
       item.path.setAttribute('stroke-width',focus||state.visualMode==='technical'?'2':'1.35');
       item.path.setAttribute('opacity',dimmed?'.42':focus?'1':'.78');
