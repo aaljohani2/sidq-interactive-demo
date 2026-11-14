@@ -100,6 +100,21 @@ function updateControls(){
     step.classList.toggle('active',active);
   });
 }
+function startShowcase(){
+  // A single click demonstrates the difference between reported and witnessed motion.
+  state.power=true;
+  state.emergency=false;
+  state.running=true;
+  state.challenge=false;
+  state.challengeCompleted=false;
+  state.scenario='spoof';
+  state.focus='motor';
+  updateControls();
+  notify('راقب قراءتي السرعة على المجسم: البيانات المبلّغ عنها لا تطابق الشاهد الفيزيائي المستقل.');
+  const target=el('prototype');
+  target?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+}
+el('showDemoBtn')?.addEventListener('click',startShowcase);
 function powerToggle(){
   if(state.power){
     state.power=false;state.running=false;state.challenge=false;state.challengeCompleted=false;
