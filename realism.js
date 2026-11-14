@@ -230,9 +230,9 @@ export async function createRealisticPresentation({THREE,scene,root,groups,rende
     const goal=fault?1:tension?.54:s.power&&s.running?.18:0;
     heat+=(goal-heat)*Math.min(1,dt*1.1);
     const thermal=mode==='thermal';
-    hotspots[0].material.opacity=thermal?.08+heat*.71:0;
-    hotspots[1].material.opacity=thermal?.04+heat*.5:0;
-    hotspots[2].material.opacity=thermal?.02+heat*.17:0;
+    hotspots[0].material.opacity=thermal?heat*.79:0;
+    hotspots[1].material.opacity=thermal?heat*.54:0;
+    hotspots[2].material.opacity=thermal?heat*.19:0;
     shimmerMaterial.uniforms.time.value=clock;
     shimmerMaterial.uniforms.strength.value=thermal?0:heat;
     shimmer.visible=!thermal&&heat>.08;
