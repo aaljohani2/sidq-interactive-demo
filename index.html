@@ -72,8 +72,10 @@
             <button type="button" class="toolbar-btn" data-wire="logic">5V / Control</button>
           </div>
         </div>
+        <div class="readout-mini-toolbar"><span><i class="readout-mini-dot"></i>قراءات مباشرة من نقاط الاستشعار</span><button id="readoutToggle" class="readout-toggle" type="button" aria-pressed="false">جميع القراءات</button></div>
         <div id="viewer" class="viewer">
           <canvas id="sceneCanvas" aria-label="نموذج ثلاثي الأبعاد تفاعلي لمنصة أكريلك تحتوي على محرك ووحدات ESP32 وحساسات وأسلاك وأزرار"></canvas>
+          <div id="sceneCallouts" class="scene-callouts" aria-label="القراءات المربوطة بحساسات النموذج"></div>
           <div id="viewerFallback" class="viewer-fallback" hidden>
             <div class="schematic" aria-hidden="true"><span>ESP32-A</span><span>12V MOTOR</span><span>ESP32-B</span></div>
             <p>يمكنك تجربة جميع عناصر التحكم والقراءات من اللوحة الجانبية.</p>
