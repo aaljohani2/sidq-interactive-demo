@@ -5,7 +5,7 @@
  * The same 3D-to-2D projection drives both the physical indicator dot
  * and the SVG connector. It runs AFTER camera/scene movement every frame.
  */
-export function createSensorCallouts({THREE, camera, scene, groups, container, onSelect, getState}) {
+export function createSensorCallouts({THREE, camera, scene, root, canvas, groups, container, onSelect, getState}) {
   const layer=document.getElementById('sceneCallouts');
   if(!layer) return {update(){},refresh(){}};
 
@@ -28,6 +28,31 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
   const world=new THREE.Vector3();
   const forward=new THREE.Vector3();
   const toward=new THREE.Vector3();
+  const raycaster=new THREE.Raycaster();
+  const occluders=[];
+  if(root){
+    root.traverse(object=>{
+      if(!object.isMesh || object.material?.transparent || object.userData?.wireKind)return;
+      if(object.geometry?.type==='PlaneGeometry'||object.geometry?.type==='TubeGeometry')return;
+      occluders.push(object);
+    });
+  }
+  function belongsToPart(mesh,part){
+    const assembly=groups[part];
+    let node=mesh;
+    while(node){if(node===assembly)return true;node=node.parent;}
+    return false;
+  }
+  function coveredByOtherPart(part){
+    if(!occluders.length)return false;
+    const distance=toward.length();
+    if(distance<.15)return false;
+    raycaster.set(camera.position,toward.clone().normalize());
+    raycaster.near=.01;
+    raycaster.far=distance-.07;
+    const hits=raycaster.intersectObjects(occluders,false);
+    return hits.some(hit=>!belongsToPart(hit.object,part));
+  }
   const anchorObjects={};
 
   // Anchors are attached to the actual 3D assemblies, not kept as static
@@ -117,7 +142,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     return new Set(entries.slice().sort((a,b)=>importance(b,s)-importance(a,s)||a.lane-b.lane).slice(0,2).map(e=>e.key));
   }
 
-  function projectAnchor(item,width,height){
+  function projectAnchor(item,width,height,viewport,checkOcclusion){
     const obj=anchorObjects[item.key];
     if(!obj)return null;
     obj.getWorldPosition(world);
@@ -127,8 +152,12 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     projection.copy(world).project(camera);
     if(!Number.isFinite(projection.x)||!Number.isFinite(projection.y)||!Number.isFinite(projection.z))return null;
     if(projection.z < -1 || projection.z > 1)return null;
-    const px=(projection.x*.5+.5)*width;
-    const py=(1-(projection.y*.5+.5))*height;
+    // Map through the actual WebGL canvas CSS rectangle. The GPU render
+    // buffer can be scaled by devicePixelRatio, but the overlay uses CSS px.
+    const px=viewport.x+(projection.x*.5+.5)*viewport.width;
+    const py=viewport.y+(1-(projection.y*.5+.5))*viewport.height;
+    if(checkOcclusion)item.occluded=coveredByOtherPart(item.part);
+    if(item.occluded)return null;
     // Do not draw a line to a fictitious point when the sensor is offscreen.
     if(px < 2 || px > width-2 || py < 2 || py > height-2)return null;
     return {x:px,y:py};
@@ -152,7 +181,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     item.visible=true;
   }
 
-  let previousWidth=0,previousHeight=0,lastStateSignature='';
+  let previousWidth=0,previousHeight=0,lastStateSignature='',occlusionElapsed=1;
   function refresh(){forceReflow=true;}
 
   // Resolve non-overlapping positions for a fixed rail, preserving the
@@ -186,8 +215,21 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
 
   function update(dt=0,providedState){
     const s=providedState||getState();
-    const width=container.clientWidth,height=container.clientHeight;
+    const width=layer.clientWidth||container.clientWidth;
+    const height=layer.clientHeight||container.clientHeight;
     if(!width||!height)return;
+    const overlayRect=layer.getBoundingClientRect();
+    const canvasRect=(canvas||container).getBoundingClientRect();
+    const viewport={
+      x:canvasRect.left-overlayRect.left,
+      y:canvasRect.top-overlayRect.top,
+      width:canvasRect.width,
+      height:canvasRect.height
+    };
+    if(!viewport.width||!viewport.height)return;
+    occlusionElapsed+=Math.min(Math.max(dt,0),.1);
+    const checkOcclusion=occlusionElapsed>.09||forceReflow;
+    if(checkOcclusion)occlusionElapsed=0;
     const changedSize=width!==previousWidth||height!==previousHeight;
     if(changedSize){
       previousWidth=width;previousHeight=height;
@@ -213,7 +255,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     const visible=[];
     for(const item of entries){
       if(!active.has(item.key)){hide(item);continue;}
-      const point=projectAnchor(item,width,height);
+      const point=projectAnchor(item,width,height,viewport,checkOcclusion);
       if(!point){hide(item);continue;}
       show(item);
       item.anchor=point;
