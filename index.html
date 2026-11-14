@@ -60,6 +60,13 @@
             <button type="button" class="toolbar-btn" data-view="side">منظر جانبي</button>
             <button type="button" class="toolbar-btn" data-view="exploded">تفكيك الأجزاء</button>
           </div>
+          <div class="view-group" role="group" aria-label="طبقات موصلات المجسم">
+            <button type="button" class="toolbar-btn active" data-wire="all">جميع الأسلاك</button>
+            <button type="button" class="toolbar-btn" data-wire="power">الطاقة</button>
+            <button type="button" class="toolbar-btn" data-wire="reported">Telemetry</button>
+            <button type="button" class="toolbar-btn" data-wire="witness">Witness</button>
+            <button type="button" class="toolbar-btn" data-wire="logic">5V / Control</button>
+          </div>
         </div>
         <div id="viewer" class="viewer">
           <canvas id="sceneCanvas" aria-label="نموذج ثلاثي الأبعاد تفاعلي لمنصة أكريلك تحتوي على محرك ووحدات ESP32 وحساسات وأسلاك وأزرار"></canvas>
