@@ -540,6 +540,11 @@ async function initScene(){
       state.setVisualMode=mode=>realismLayer.setMode(mode);
       state.setVisualMode(state.visualMode);
     }catch(error){console.warn('Premium materials unavailable:',error);}
+    let sensorOverlay=null;
+    try{
+      const {createSensorCallouts}=await import('./sensor-callouts.js');
+      sensorOverlay=createSensorCallouts({THREE,camera,scene,groups,container:wrap,onSelect:choosePart,getState:()=>state});
+    }catch(error){console.warn('Scene annotations unavailable:',error);}
     let clock=0;
     state.drawScene=(dt,s)=>{
       clock+=dt;
@@ -572,7 +577,9 @@ async function initScene(){
         if(t>=1)cameraTransition=null;
       }
       realismLayer?.update(dt,s);
-      orbit.update();renderer.render(scene,camera);
+      orbit.update();
+      sensorOverlay?.update(dt,s);
+      renderer.render(scene,camera);
     };
     state.drawScene(0,state);
   }catch(error){
