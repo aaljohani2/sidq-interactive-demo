@@ -109,7 +109,9 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     if(!Number.isFinite(value))return '—';
     return item.key==='reported'||item.key==='witness'?String(Math.round(value)):value.toFixed(2);
   }
-  function visibleSet(s,width){
+  function visibleSet(s,width,height){
+    // Compact or short landscape viewports prioritize two values over collisions.
+    if(height<370)return new Set(entries.slice().sort((a,b)=>importance(b,s)-importance(a,s)).slice(0,2).map(e=>e.key));
     if(width>=590||expanded)return new Set(entries.map(e=>e.key));
     // Stable sorting by value, with a deterministic tie-break.
     return new Set(entries.slice().sort((a,b)=>importance(b,s)-importance(a,s)||a.lane-b.lane).slice(0,2).map(e=>e.key));
@@ -124,7 +126,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     if(!(distance>camera.near+.015))return null;
     projection.copy(world).project(camera);
     if(!Number.isFinite(projection.x)||!Number.isFinite(projection.y)||!Number.isFinite(projection.z))return null;
-    if(projection.z<-.995||projection.z>.995)return null;
+    if(projection.z < -1 || projection.z > 1)return null;
     const px=(projection.x*.5+.5)*width;
     const py=(1-(projection.y*.5+.5))*height;
     // Do not draw a line to a fictitious point when the sensor is offscreen.
@@ -162,8 +164,8 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     const positions=items.map(item=>clamp(item.anchor.y-height*.5,top,bottom-height));
     if(items.length===2){
       if(positions[1]<positions[0]+minSpacing){
-        const mid=(positions[0]+positions[1]+height)/2;
-        positions[0]=mid-height-gap/2-height/2;
+        const center=(positions[0]+positions[1])/2;
+        positions[0]=center-(height+gap)/2;
         positions[1]=positions[0]+minSpacing;
       }
       if(positions[0]<top){
@@ -198,7 +200,7 @@ export function createSensorCallouts({THREE, camera, scene, groups, container, o
     camera.updateMatrixWorld();
     camera.getWorldDirection(forward);
 
-    const active=visibleSet(s,width);
+    const active=visibleSet(s,width,height);
     const cardW=width<390?112:width<590?123:width<850?133:155;
     const cardH=width<390?57:width<590?61:69;
     const margin=width<390?8:width<590?10:16;
