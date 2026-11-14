@@ -19,3 +19,34 @@
 @media(max-width:860px){.shell{width:calc(100% - 32px)}.topbar{height:73px}.top-links{display:none}.hero{grid-template-columns:1fr;padding:35px 0}.hero-art{display:none}.main-grid{grid-template-columns:1fr}.viewer{height:530px}.control-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.control-panel>.section-head,.control-panel>.subtext,.system-state,.status-card,.message{grid-column:1/-1}.control-panel>.subtext{margin-top:-17px}.detail-grid{grid-template-columns:1fr}.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:590px){.shell{width:calc(100% - 24px)}.hero h1{font-size:2.12rem}.hero p{font-size:.83rem}.hero-facts{gap:7px}.fact{min-width:95px;flex:1;padding:7px 9px}.fact strong{font-size:.9rem}.fact small{font-size:.62rem}.header-version{padding:5px 9px;font-size:.59rem}.brand-text strong{font-size:1.1rem}.brand-icon{width:38px;height:38px}.viewer-panel,.control-panel{padding:12px}.viewer{height:410px}.section-head h2{font-size:1.03rem}.viewer-hud{left:11px;right:11px;font-size:.52rem}.viewer-hint{font-size:.6rem;right:11px}.viewer-model-title{bottom:42px;right:10px;max-width:205px;padding:8px}.viewer-model-title p{font-size:.62rem}.part-chip,.toolbar-btn{font-size:.65rem;padding:6px 8px}.control-panel{display:flex}.control-panel>.subtext{margin-top:-12px}.metrics{gap:8px}.metric{padding:12px}.metric-label{font-size:.66rem}.metric strong{font-size:1.65rem}.metric p{font-size:.61rem}.chart-header{align-items:flex-start;flex-direction:column}.chart-panel{padding:12px}.chart-frame{height:215px}.wiring-rows{grid-template-columns:1fr}.block-head{flex-direction:column;align-items:flex-start}.block-head h2{font-size:1.13rem}.flow{grid-template-columns:1fr 1fr}.flow-step{min-height:110px}.footer{gap:9px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* SIDQ Studio V2 — restrained high-fidelity presentation refinements */
+:root{--bg:#0a161f;--surface:#101f29;--surface2:#112833;--line:#304653;--mint:#88dcd3;--gold:#d7b37e}
+body{background:radial-gradient(ellipse 95% 50% at 69% -12%,#233b49 0%,#0c1b26 55%,#08131c 100%);}
+.panel{background:linear-gradient(156deg,rgba(16,35,46,.985),rgba(10,24,34,.99));box-shadow:0 15px 42px #020b1040}
+.hero-art .hero-ring{border-color:#88dcd31b}.hero-emblem{box-shadow:0 0 85px #86c9c916}
+.hero h1 em{color:#9be1d9}
+.header-version{border-color:#4a6970;background:#132d35;color:#addfdc}
+.viewer{background:radial-gradient(ellipse at 48% 38%,#233945,#0c1d29 71%,#0a1924 100%);border-color:#42606d;box-shadow:inset 0 0 65px rgba(0,0,0,.25)}
+.presentation-modes{border:1px solid #314c58;border-radius:11px;background:#0b222e;padding:8px 10px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.presentation-mode-title{display:flex;gap:9px;align-items:center;font:600 .65rem 'Space Grotesk',sans-serif;letter-spacing:1.1px;color:#c2d7de;direction:ltr}
+.mode-live-dot{width:7px;height:7px;border-radius:50%;background:#7fcdbe;box-shadow:0 0 13px #7fcdbe66}
+.presentation-modes .toolbar-btn{padding:5px 11px;font-size:.71rem}
+.presentation-modes .toolbar-btn.active{background:#234748;color:#cae9e6;border-color:#679b99}
+.view-toolbar{margin-bottom:12px;gap:7px}
+.view-toolbar .toolbar-btn{background:#152b36;color:#b5c6cc;border-color:#38505b}
+.view-toolbar .toolbar-btn.active{border-color:#72948e;color:#d1e9e2;background:#244341}
+.viewer-model-title{border-right-color:#83c5bb;box-shadow:0 7px 22px #0004;backdrop-filter:blur(5px)}
+.viewer-hud{color:#b1c9d0}.part-chip.selected{border-color:#6fa9a3;background:#1a3b3c;color:#d3ece8}
+.thermal-legend{display:flex;flex-direction:column;gap:4px;position:absolute;z-index:3;left:20px;top:52px;padding:8px 12px;min-width:148px;background:rgba(8,25,34,.84);border:1px solid #57636c;border-radius:8px;pointer-events:none;box-shadow:0 6px 22px #0004}
+.thermal-legend[hidden]{display:none}
+.thermal-legend strong{font:600 .58rem 'Space Grotesk',sans-serif;color:#ccd8d9;letter-spacing:1px}
+.thermal-gradient{width:100%;height:6px;border-radius:100px;background:linear-gradient(90deg,#244b8b 0%,#65abb2 29%,#e5cc74 59%,#e68b4c 83%,#b6473d 100%)}
+.thermal-legend div{display:flex;justify-content:space-between;direction:ltr;color:#99aeb5}.thermal-legend small{font:.55rem 'Space Grotesk',sans-serif}
+.part-strip{margin-top:15px}
+.control-panel .wide-btn{background:#1b5656;border-color:#558d8a;color:#d5f0e9}
+.control-panel .op-btn.start{background:#245548;color:#b8e7d6;border-color:#3f806f}
+.control-panel .op-btn.stop{background:#513a31;border-color:#856a59}
+.state-meta{color:#89d7c9}
+.chart-panel,.metric,.component-card,.wiring-card{background:linear-gradient(152deg,#122a36,#0d202a)}
+@media(max-width:700px){.presentation-modes{flex-wrap:wrap;padding:9px;gap:8px}.presentation-mode-title{font-size:.57rem}.presentation-modes .toolbar-btn{padding:5px 9px;font-size:.67rem}.thermal-legend{top:67px;left:9px;min-width:125px;padding:7px 9px}}
