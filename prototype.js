@@ -112,7 +112,7 @@ function startShowcase(){
   updateControls();
   notify('راقب قراءتي السرعة على المجسم: البيانات المبلّغ عنها لا تطابق الشاهد الفيزيائي المستقل.');
   const target=el('prototype');
-  target?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  target?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches?'auto':'smooth',block:'start'});
 }
 el('showDemoBtn')?.addEventListener('click',startShowcase);
 function powerToggle(){
