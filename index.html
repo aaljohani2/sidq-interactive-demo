@@ -26,6 +26,12 @@
     </nav>
     <span class="header-version">MIDA · PROTOTYPE V1</span>
   </header>
+  <nav class="mobile-nav shell" aria-label="تنقل الجوال">
+    <a href="#prototype">المجسم</a>
+    <a href="#controls">التشغيل</a>
+    <a href="#operation">آلية العمل</a>
+    <a href="#hardware">المكونات</a>
+  </nav>
   <main id="home" class="shell">
     <section class="hero" aria-labelledby="heroTitle">
       <div>
@@ -84,7 +90,7 @@
           </div>
           <div class="viewer-hud top"><span>SIDQ / PROTOTYPE BENCH</span><span id="clock">T+00:00</span></div>
           <div class="thermal-legend" id="thermalLegend" hidden><strong>THERMAL VIEW</strong><span class="thermal-gradient"></span><div><small>LOW</small><small>HIGH</small></div></div>
-          <span id="viewerHint" class="viewer-hint">اسحب لتدوير المجسم · استخدم العجلة للتقريب · اضغط على أي قطعة</span>
+          <span id="viewerHint" class="viewer-hint"><span class="viewer-hint-desktop">اسحب لتدوير المجسم · استخدم العجلة للتقريب · اضغط على أي قطعة</span><span class="viewer-hint-mobile">اسحب بإصبع للتدوير · بإصبعين للتقريب</span></span>
 
           <div class="viewer-hud bottom">
             <div class="viewer-indicator"><span><i class="indicator-dot teal"></i>Telemetry</span><span><i class="indicator-dot"></i>Trusted Witness</span><span><i class="indicator-dot purple"></i>Hall Encoder</span></div>
@@ -111,7 +117,7 @@
           <button type="button" class="part-chip" data-part="controls">الأزرار</button>
         </div>
       </div>
-      <aside class="control-panel panel" aria-label="لوحة التحكم بالمجسم">
+      <aside id="controls" class="control-panel panel" aria-label="لوحة التحكم بالمجسم">
         <div class="section-head"><div><span class="section-tag">02 / OPERATING CONSOLE</span><h2>لوحة التحكم والتشغيل</h2></div><span class="micro-pill">SYSTEM CONTROL</span></div>
         <p class="subtext">شغّل طاقة المنظومة، ثم المحرك، واختر حالة تشغيل لمشاهدة الاستجابة مباشرة على المجسم والقراءات.</p>
 
