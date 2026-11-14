@@ -155,7 +155,7 @@ function renderChart() {
     ctx.fillStyle='#718d9f';ctx.fillText(String(Math.round(v)),pad.left-9,y);
   }
   ctx.fillStyle='#718d9f';ctx.textAlign='center';ctx.textBaseline='top';
-  for(let i=0;i<=4;i++){const x=pad.left+(plotW*i/4);ctx.fillText(String(Math.round(i*state.history.length/4))+'s',x,height-pad.bottom+7);}
+  for(let i=0;i<=4;i++){const x=pad.left+(plotW*i/4);ctx.fillText(String(Math.round(i*state.history.length/4*0.17))+'s',x,height-pad.bottom+7);}
   const series = [{field:'witness',color:'#e9bc70'},{field:'reported',color:'#40d9d5'}];
   for(const entry of series){
     if(state.history.length < 2) continue;
