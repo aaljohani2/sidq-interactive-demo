@@ -262,10 +262,10 @@ async function initScene(){
     camera.position.set(10.5,10.5,13.6);
     const orbit=new OrbitControls(camera,canvas);
     orbit.enableDamping=true;orbit.dampingFactor=.065;orbit.enablePan=false;
-    orbit.minDistance=8;orbit.maxDistance=27;orbit.minPolarAngle=.18;orbit.maxPolarAngle=1.48;
+    orbit.minDistance=8;orbit.maxDistance=48;orbit.minPolarAngle=.10;orbit.maxPolarAngle=1.48;
     orbit.target.set(0,.16,0);
-    let cameraTransition=null;
-    orbit.addEventListener('start',()=>{cameraTransition=null;});
+    let cameraTransition=null,orbitInteracted=false;
+    orbit.addEventListener('start',()=>{cameraTransition=null;orbitInteracted=true;});
     const lightA=new THREE.HemisphereLight(0xc6eff7,0x0d1929,2.1);scene.add(lightA);
     const sun=new THREE.DirectionalLight(0xe8ffff,2.25);sun.position.set(-2,11,7);scene.add(sun);
     const highlightLight=new THREE.PointLight(0x57ead7,32,15);highlightLight.position.set(-5,5,-3);scene.add(highlightLight);
@@ -464,24 +464,45 @@ async function initScene(){
       }
     };
     state.showWireGroups(state.wireView);
+    const cameraPresets={
+      isometric:[10.5,10.5,13.6],
+      top:[0,18.3,.05],
+      front:[0,5.2,17.8],
+      side:[17.7,5.4,0],
+      exploded:[13,13,15]
+    };
+    function fitRatio(){
+      // Portrait screens have a narrower horizontal FOV.
+      // Pull back the virtual camera rather than cropping the acrylic platform.
+      return Math.min(2,Math.max(1,1.04/Math.max(.52,camera.aspect)));
+    }
+    function fittedPreset(v){
+      return new THREE.Vector3(...(cameraPresets[v]||cameraPresets.isometric)).multiplyScalar(fitRatio());
+    }
     function setCameraPreset(v){
-      const points={
-        isometric:[10.5,10.5,13.6],
-        top:[0,18.3,.05],
-        front:[0,5.2,17.8],
-        side:[17.7,5.4,0],
-        exploded:[13,13,15]
+      orbitInteracted=false;
+      cameraTransition={
+        from:camera.position.clone(),
+        to:fittedPreset(v),
+        fromLook:orbit.target.clone(),
+        toLook:new THREE.Vector3(0,.16,0),
+        elapsed:0
       };
-      const p=points[v]||points.isometric;
-      cameraTransition={from:camera.position.clone(),to:new THREE.Vector3(...p),fromLook:orbit.target.clone(),toLook:new THREE.Vector3(0,.16,0),elapsed:0};
     }
     state.setCamera=setCameraPreset;
     function resize(){
       const w=Math.round(canvas.clientWidth||wrap.clientWidth);
       const h=Math.round(canvas.clientHeight||wrap.clientHeight);
       if(!w||!h)return;
+      const previousAspect=camera.aspect;
       renderer.setSize(w,h,false);
       camera.aspect=w/h;camera.updateProjectionMatrix();
+      if(!orbitInteracted && Math.abs(previousAspect-camera.aspect)>.025){
+        const destination=fittedPreset(state.view);
+        if(cameraTransition)cameraTransition.to.copy(destination);
+        else camera.position.copy(destination);
+        orbit.update();
+      }
     }
     window.addEventListener('resize',resize);resize();
     const ro=typeof ResizeObserver==='function'?new ResizeObserver(resize):null;ro?.observe(wrap);
