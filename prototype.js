@@ -4,9 +4,9 @@ const el = id => document.getElementById(id);
 const state = {
   power:false, running:false, emergency:false, scenario:'normal', challenge:false,
   challengeCompleted:false, challengeStart:0, elapsed:0, sampleTime:0, lastFrame:0,
-  view:'isometric', wireView:'all', focus:'motor', chart:[],
+  view:'isometric', wireView:'all', visualMode:'realistic', focus:'motor', chart:[],
   metrics:{reported:0,witness:0,current:0,vibration:0},
-  drawScene:null, setCamera:null, showWireGroups:null, setFocus3D:null,
+  drawScene:null, setCamera:null, showWireGroups:null, setFocus3D:null, setVisualMode:null,
   lastMessage:'ابدأ من مفتاح الطاقة، ثم اضغط تشغيل المحرك.'
 };
 const scenarioInfo = {
@@ -179,6 +179,17 @@ function chooseView(view){
   state.setCamera?.(view);
 }
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>chooseView(b.dataset.view)));
+function chooseVisualMode(mode){
+  if(!['realistic','thermal','technical'].includes(mode))return;
+  state.visualMode=mode;
+  document.querySelectorAll('[data-visual]').forEach(b=>{
+    b.classList.toggle('active',b.dataset.visual===mode);
+    b.setAttribute('aria-pressed',String(b.dataset.visual===mode));
+  });
+  const legend=el('thermalLegend');if(legend)legend.hidden=mode!=='thermal';
+  state.setVisualMode?.(mode);
+}
+document.querySelectorAll('[data-visual]').forEach(b=>b.addEventListener('click',()=>chooseVisualMode(b.dataset.visual)));
 function chooseWires(view){
   state.wireView=view;
   document.querySelectorAll('[data-wire]').forEach(b=>b.classList.toggle('active',b.dataset.wire===view));
@@ -522,6 +533,13 @@ async function initScene(){
         }
       }
     });
+    let realismLayer=null;
+    try{
+      const {createRealisticPresentation}=await import('./realism.js');
+      realismLayer=await createRealisticPresentation({THREE,scene,root,groups,renderer,sun,rotor,focusRing,physicalWire});
+      state.setVisualMode=mode=>realismLayer.setMode(mode);
+      state.setVisualMode(state.visualMode);
+    }catch(error){console.warn('Premium materials unavailable:',error);}
     let clock=0;
     state.drawScene=(dt,s)=>{
       clock+=dt;
@@ -553,6 +571,7 @@ async function initScene(){
         orbit.target.lerpVectors(cameraTransition.fromLook,cameraTransition.toLook,e);
         if(t>=1)cameraTransition=null;
       }
+      realismLayer?.update(dt,s);
       orbit.update();renderer.render(scene,camera);
     };
     state.drawScene(0,state);
